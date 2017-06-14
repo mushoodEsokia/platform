@@ -54,7 +54,8 @@ class MessageController extends Controller
                     //echo 'Attachments: '.$oMessage->getAttachments()->count().'<br />';
                     echo $oMessage->getHTMLBody(true);
                     echo "key: " . $index . " <br />";
-                    if($index>$messagesInDatabase){
+                    //since we read only unread, no need to check
+                    //if($index>$messagesInDatabase){
                         echo "you have one new message <br />";
                         
                         $message = new Message();
@@ -65,7 +66,7 @@ class MessageController extends Controller
                         $message->save();
                         dump($oMessage);
                          
-                    }
+                    //}
                 }
             }
         }
