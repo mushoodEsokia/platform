@@ -180,6 +180,7 @@ return [
         Laravel\Scout\ScoutServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
+        Webklex\IMAP\Providers\LaravelServiceProvider::class,
 
     ],
 

@@ -27,3 +27,5 @@ Route::get('/job', 'JobController@index');
 Route::get('/admin/job/create', 'JobController@create');
 Route::post('/admin/job/create', 'JobController@store');
 Route::get('/admin/job', 'JobController@indexAdmin');
+
+Route::get('/email', 'MessageController@index');
