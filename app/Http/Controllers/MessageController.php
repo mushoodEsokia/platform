@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Webklex\IMAP\Client;
 use App\Message;
+use Event;
+use App\Events\NewMessage;
 
 class MessageController extends Controller
 {
@@ -12,7 +14,7 @@ class MessageController extends Controller
         
         //get count of all message from our database
         $messagesInDatabase = Message::count();
-        echo $messagesInDatabase . "<br />";
+        //echo $messagesInDatabase . "<br />";
 
         $oClient = new Client([
             'host'          => 'imap.gmail.com',
@@ -28,14 +30,14 @@ class MessageController extends Controller
 
         //Get all Mailboxes
         $aMailboxes = $oClient->getFolders();
-        echo $oClient -> countRecentMessages().'<br />';
-        echo $oClient -> countMessages().'<br />';
+        //echo $oClient -> countRecentMessages().'<br />';
+        //echo $oClient -> countMessages().'<br />';
         $messagesInMailbox = $oClient -> countMessages();
        
         //Loop through every Mailbox
         /** @var \Webklex\IMAP\Folder $oMailbox */
         foreach($aMailboxes as $oMailbox){
-            echo $oMailbox -> fullName .'<br />';
+            //echo $oMailbox -> fullName .'<br />';
             if($oMailbox -> fullName == 'INBOX'){
                 //Get all Messages of the current Mailbox
                 /** @var \Webklex\IMAP\Message $oMessage */
@@ -44,33 +46,34 @@ class MessageController extends Controller
                 $criteria = 'UNSEEN'; //get only unread messages in inbox
                 foreach($oMailbox->getMessages($criteria) as $key => $oMessage){
                     $index++;
-                    echo $oMessage->subject.'<br />';
+                    //echo $oMessage->subject.'<br />';
                     $from = $oMessage->from;
                     //print_r($from);
-                    echo $from[0]->mail.'<br />';
+                    //echo $from[0]->mail.'<br />';
                     $to = $oMessage->to;
                     //print_r($to);
-                    echo $to[0]->mail.'<br />';
+                    //echo $to[0]->mail.'<br />';
                     //echo 'Attachments: '.$oMessage->getAttachments()->count().'<br />';
-                    echo $oMessage->getHTMLBody(true);
-                    echo "key: " . $index . " <br />";
+                    //echo $oMessage->getHTMLBody(true);
+                    //echo "key: " . $index . " <br />";
                     //since we read only unread, no need to check
                     //if($index>$messagesInDatabase){
-                        echo "you have one new message <br />";
+                        //echo "you have one new message <br />";
                         
-                        $message = new Message();
-                        $message->from = $from[0]->mail;
-                        $message->to = $to[0]->mail;
-                        $message->subject = $oMessage->subject;
-                        $message->content = $oMessage->getHTMLBody(true);
-                        $message->save();
-                        dump($oMessage);
-                         
+                    $message = new Message();
+                    $message->from = $from[0]->mail;
+                    $message->to = $to[0]->mail;
+                    $message->subject = $oMessage->subject;
+                    $message->content = $oMessage->getHTMLBody(true);
+                    $message->save();
+                    //dump($oMessage);
+                    Event::fire(new NewMessage($message));
                     //}
                 }
             }
         }
-        dump($aMailboxes);die();
-        return view('email.index',compact('blogs'));
+        //dump($aMailboxes);
+        $emails  = Message::orderBy('created_at', 'desc')->get();
+        return view('email.index',compact('emails'));
     }
 }

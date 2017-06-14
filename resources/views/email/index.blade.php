@@ -1,13 +1,14 @@
 @extends('layoutFront.master')
 
 @section('content')
-    <h2>These are my email.</h2>
-    {{--
-    @foreach($blogs as $blog)
-        <h3>{{$blog->title}}</h3>
-        <p>{{$blog->body}}</p>
+    <h2>These are my emails.</h2>
+    @foreach($emails as $email)
+        <h5>FROM: {{$email->from}}</h5>
+        <h5>TO: {{$email->to}}</h5>
+        <h3>Subject: {{$email->subject}}</h3>
+        <p>{!!$email->content!!}</p>
+        <hr />
     @endforeach
-    --}}
 @endsection
 
 @section('script')
