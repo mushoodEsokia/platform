@@ -2,7 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\NewMessage;
+use Illuminate\Support\Facades\Mail;
+use App\Events\NewMessage as MessageEvent;
+use App\Mail\NewMessage as MessageMail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -24,10 +26,11 @@ class SendEmailNotification
      * @param  NewMessage  $event
      * @return void
      */
-    public function handle(NewMessage $event)
+    public function handle(MessageEvent $event)
     {
         //hanlde event when a new message has been created
         $message = $event->getMessage();
+        Mail::to('my@esokia-webagency.com')->send(new MessageMail());
         //dump($message->from);die();
     }
 }
