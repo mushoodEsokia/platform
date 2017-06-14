@@ -42,13 +42,15 @@ class SendEmailNotification
             $initialMessageIdPart = explode("@", $initialMessageId[1]);
             $initialMessage = Message::find($initialMessageIdPart[0]);
             //var_dump($initialMessage->from);die();
-            $messageMaillable = new MessageMail();
+            $messageMaillable = new MessageMail($message);
             $messageMaillable ->replyTo($replyTo, 'Reply Guy');
+            $messageMaillable -> subject($message->subject);
             Mail::to($initialMessage->from)
                     ->send($messageMaillable);
         } else{
-            $messageMaillable = new MessageMail();
+            $messageMaillable = new MessageMail($message);
             $messageMaillable ->replyTo($replyTo, 'Reply Guy');
+            $messageMaillable -> subject($message->subject);
             Mail::to('my@esokia-webagency.com')
                     ->send($messageMaillable);
         }
