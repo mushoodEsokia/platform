@@ -4,13 +4,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/esokia/work/www/platform/vendor/webklex/laravel-imap/src/IMAP/Client.php</file>
+            <file>file:/home/esokia/work/www/platform/config/mail.php</file>
             <file>file:/home/esokia/work/www/platform/.env</file>
+            <file>file:/home/esokia/work/www/platform/app/Events/NewMessage.php</file>
             <file>file:/home/esokia/work/www/platform/app/Http/Controllers/MessageController.php</file>
-            <file>file:/home/esokia/work/www/platform/app/Http/Controllers/BlogController.php</file>
-            <file>file:/home/esokia/work/www/platform/config/app.php</file>
+            <file>file:/home/esokia/work/www/platform/vendor/webklex/laravel-imap/src/IMAP/Folder.php</file>
+            <file>file:/home/esokia/work/www/platform/vendor/laravel/framework/src/Illuminate/Support/Collection.php</file>
+            <file>file:/home/esokia/work/www/platform/resources/views/email/message.blade.php</file>
+            <file>file:/home/esokia/work/www/platform/app/Mail/NewMessage.php</file>
             <file>file:/home/esokia/work/www/platform/routes/web.php</file>
-            <file>file:/home/esokia/work/www/platform/config/imap.php</file>
             <file>file:/home/esokia/work/www/platform/composer.json</file>
+            <file>file:/home/esokia/work/www/platform/app/Listeners/SendEmailNotification.php</file>
+            <file>file:/home/esokia/work/www/platform/app/Providers/EventServiceProvider.php</file>
             <file>file:/home/esokia/work/www/platform/resources/views/email/index.blade.php</file>
         </group>
     </open-files>

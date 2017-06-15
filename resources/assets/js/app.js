@@ -7,7 +7,6 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,8 +14,13 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+var app = require('express')();
+var http = require('http').Server(app);
 
-const app = new Vue({
-    el: '#app'
+app.get('/', function(req, res){
+  res.send('<h1>Hello world</h1>');
+});
+
+http.listen(3000, function(){
+  console.log('listening on *:3000');
 });
