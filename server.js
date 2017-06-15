@@ -2,12 +2,6 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-app.get('/chat', function(req, res){
-    res.send({
-        status: 200,
-        response: 'Params sent and client loaded successfully'
-    });
-});
 
 io.on('connection', function(socket){
   console.log('a user connected');
