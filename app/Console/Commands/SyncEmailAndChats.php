@@ -99,6 +99,17 @@ class SyncEmailAndChats extends Command
                     //dump($oMessage);
                     Event::fire(new NewMessage($message));
                     //}
+                    
+                    $ch = curl_init();  
+                    $url = "http://localhost:3000/";
+                    curl_setopt($ch,CURLOPT_URL,$url);
+                    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+                //  curl_setopt($ch,CURLOPT_HEADER, false); 
+
+                    $output=curl_exec($ch);
+
+                    curl_close($ch);
+                    $this->info('curl sent'); 
                 }
             }
         }

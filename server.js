@@ -23,3 +23,8 @@ io.on('connection', function(socket){
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
+
+app.get('/',function(request,response){
+    console.log('Email received on server');
+    io.emit('email message', "hello");
+});

@@ -20,9 +20,10 @@
             //var socket = io();
             var socket   = io.connect(':3000', {secure:false});
             
-            socket.emit('email message', "hello");
+            //socket.emit('email message', "hello");
             socket.on('email message', function(msg){
-              alert('New email received');
+                location.reload();
+              //alert('New email received');
             });
         });
     });
