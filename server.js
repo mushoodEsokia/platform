@@ -10,8 +10,13 @@ io.on('connection', function(socket){
   });
 
   socket.on('chat message', function(msg){
-      console.log('Message received on server');
+    console.log('Message received on server');
     io.emit('chat message', msg);
+  });
+  
+  socket.on('email message', function(msg){
+    console.log('Email received on server');
+    io.emit('email message', msg);
   });
 });
 
