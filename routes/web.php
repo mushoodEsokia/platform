@@ -19,7 +19,7 @@ Route::get('/chat', function () {
     return view('chat.index');
 });
 
-Route::get('/chatmessage', 'MessageController@index');
+Route::get('/chatmessage', 'MessageController@privateMessage');
 
 Route::get('/blog', 'BlogController@index');
 Route::get('/admin/blog/create', 'BlogController@create');

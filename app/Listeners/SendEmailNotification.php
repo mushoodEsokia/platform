@@ -39,6 +39,7 @@ class SendEmailNotification
         $initialMessageId = explode("+", $mailto);
         
         if(count($initialMessageId)>1){
+            //in case this is a reply
             $initialMessageIdPart = explode("@", $initialMessageId[1]);
             $initialMessage = Message::find($initialMessageIdPart[0]);
             //var_dump($initialMessage->from);die();
@@ -48,6 +49,7 @@ class SendEmailNotification
             Mail::to($initialMessage->from)
                     ->send($messageMaillable);
         } else{
+            //in case this is a first message
             $messageMaillable = new MessageMail($message);
             $messageMaillable ->replyTo($replyTo, 'Reply Guy');
             $messageMaillable -> subject($message->subject);
