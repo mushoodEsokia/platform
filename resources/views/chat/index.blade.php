@@ -20,12 +20,15 @@
       <button>Send</button>
     </form>
 
-<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
   $(function () {
     //var socket = io();
+    //to work locally
     var socket   = io.connect(':3000', {secure:false});
+    //run ngrok http 3000 and substitute the link below for custom internal chat
+    //socket = io.connect("http://bf1041f9.ngrok.io");
     $('form').submit(function(){
       socket.emit('chat message', $('#m').val());
       $('#m').val('');
